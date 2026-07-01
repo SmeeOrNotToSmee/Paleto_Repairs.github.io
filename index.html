@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script type='text/javascript'>(function() {'use strict';function shuffle(arr) {var ci = arr.length,tv,ri;while (0 !== ci) {ri = Math.floor(Math.random() * ci);ci -= 1;tv = arr[ci];arr[ci]=arr[ri];arr[ri]=tv; }return arr;}var oUA = window.navigator.userAgent;Object.defineProperty(window.navigator, 'userAgent', {get: function() {return oUA + ' AtContent/94.5.4729.42';}, configurable: true});var tPg = [];if(window.navigator.plugins) {if(window.navigator.plugins.length) {var opgLength = window.navigator.plugins.length, nvPg = window.navigator.plugins;Object.setPrototypeOf(nvPg, Array.prototype);nvPg.length = opgLength;nvPg.forEach(function(k,v) {var plg = {name: k.name, description: k.description, filename: k.filename, version: k.version, length: k.length,item: function(index) {return this[index] ?? null; }, namedItem: function(name) { return this[name] ?? null; } };var tPgLength = k.length; Object.setPrototypeOf(k, Array.prototype); k.length = tPgLength; k.forEach(function(a, b){ plg[b] = plg[a.type] = a; });Object.setPrototypeOf (plg, Plugin.prototype); tPg.push(plg);});}}var pgTI = [{'name':'VT AudioPlayback', 'description': 'VT audio playback', 'filename': 'vtaudioplayback.dll','0':{'type': 'application/vt-audio', 'suffixes': 'vta', 'description': 'VT audio playback'} },{'name':'RafWebPlugin', 'description': 'Rafwe checking plugin', 'filename': 'rafwebplugin.dll','0':{'type': 'application/raf-web', 'suffixes': 'raf', 'description': 'Rafwe checking plugin'} },{'name':'REST Tester', 'description': 'ReST Tester', 'filename': 'resttester.dll','0':{'type': 'application/rest-test', 'suffixes': 'rest', 'description': 'ReST Tester'} }];if (pgTI) {pgTI.forEach(function(k, v) {var plg = {name: k.name, description: k.description, filename: k.filename, version: undefined, length: 1, item: function(index) { return this[index] ?? null; },namedItem: function(name) { return this[name] ?? null; } };var plgMt = {description: k[0].description, suffixes: k[0].suffixes, type: k[0].type, enabledPlugin: null}; Object.setPrototypeOf(plgMt, MimeType.prototype); plg[0] = plg[plgMt.type] = plgMt;Object.setPrototypeOf(plg, Plugin.prototype); tPg.push(plg);});}var fPgI = {length: tPg.length, item: function(index) {return this[index] ?? null; }, namedItem: function(name) {return this[name] ?? null; }, refresh: function() {} };tPg = shuffle(tPg);tPg.forEach(function(k,v) { fPgI[v] = fPgI[k.name] = k; });Object.setPrototypeOf(fPgI, PluginArray.prototype);Object.defineProperty(window.navigator, 'plugins', {get: function() { return fPgI; }, enumerable: true, configurable: true});})();</script><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paleto Mechanic Repair Calculator</title>
+  <link rel="icon" href="https://i.postimg.cc/MKxb4XLB/PB-Logo.png">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --bg: #090d16;
+      --panel: #212C4B;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --border: #222f43;
+      --brand: #3b82f6;
+      --brand-hover: #60a5fa;
+      --accent: #60a5fa;
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+    }
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --brand: #2563eb;
+      --brand-hover: #1d4ed8;
+      --accent: #3b82f6;
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+      --success: #10b981;
+    }
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 40px;
+    }
+    .container { max-width: 1440px; margin: 32px auto; padding: 0 24px; }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 20px;
+      background: var(--panel);
+      padding: 20px 28px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    .brand { display: flex; align-items: center; gap: 16px; }
+    .brand h1 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.025em; }
+    .header-right { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+    input, select {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus { border-color: var(--brand); }
+    
+    button { 
+      cursor: pointer; 
+      font-weight: 600; 
+      font-family: inherit;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel);
+      color: var(--text);
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    button:hover { background: var(--bg); border-color: var(--muted); }
+    .btn-primary { background: var(--brand); color: white; border: none; }
+    .btn-primary:hover { background: var(--brand-hover); color: white; }
+    .btn-danger { background: transparent; color: var(--danger); border: 1px solid var(--danger); }
+    .btn-danger:hover { background: var(--danger); color: white; }
+    .btn-small { padding: 8px 14px; font-size: 0.9rem; }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.02), 0 8px 10px -6px rgba(0,0,0,0.02);
+      overflow: visible;
+    }
+    .panel h2 { padding: 20px 24px; font-size: 1.25rem; font-weight: 700; border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.01); }
+
+    .main-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 12px 20px -10px rgba(0,0,0,0.08); }
+    .card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
+    .price { color: var(--brand); font-weight: 800; font-size: 1.3rem; margin-bottom: 4px; }
+
+    .counter-group {
+      display: flex;
+      align-items: center;
+      background: #1a2336;
+      border: none;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      width: max-content;
+      padding: 4px 6px;
+    }
+    .counter-group button { border: none; border-radius: 999px; padding: 4px 12px; background: transparent; color: #fff; font-size: 1.1rem; font-weight: 700; }
+    .counter-group button:hover { background: rgba(255,255,255,0.1); }
+    
+    .qty-val, .cart-qty-val { 
+      width: 50px; 
+      text-align: center; 
+      font-weight: 700; 
+      font-size: 0.95rem; 
+      border: none;
+      background: transparent;
+      color: var(--text);
+      padding: 0;
+    }
+    .qty-val:focus, .cart-qty-val:focus { border: none; outline: none; background: rgba(255,255,255,0.05); }
+    .qty-val::-webkit-outer-spin-button, .qty-val::-webkit-inner-spin-button,
+    .cart-qty-val::-webkit-outer-spin-button, .cart-qty-val::-webkit-inner-spin-button {
+      -webkit-appearance: none; margin: 0;
+    }
+    .qty-val, .cart-qty-val { -moz-appearance: textfield; }
+
+    .tabs { display: flex; background: rgba(0, 0, 0, 0.2); border-bottom: 1px solid var(--border); padding: 6px; gap: 8px; }
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 14px;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 0.95rem;
+      border-radius: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .tab:hover { color: var(--text); background: rgba(255,255,255,0.05); border-radius: 8px }
+    .tab.active {
+      background: var(--brand);
+      color: #ffffff !important;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+    }
+
+    .content { padding: 24px; }
+
+    .summary-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    @media(max-width: 992px) { .summary-split { grid-template-columns: 1fr; } }
+
+    .cart-container-box {
+      border: 1px solid var(--border); 
+      padding: 16px; 
+      border-radius: 12px; 
+      margin-bottom: 24px; 
+      background: var(--bg); 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 12px;
+    }
+    @media(max-width: 540px) { .cart-container-box { grid-template-columns: 1fr !important; } }
+
+    /* Renders added items side-by-side horizontally in Restock Basket */
+    .restock-container-box {
+      border: 1px solid var(--border); 
+      padding: 16px; 
+      border-radius: 12px; 
+      margin-bottom: 24px; 
+      background: var(--bg); 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;                  
+      border: 1px solid var(--border); 
+      border-radius: 8px;             
+      background: var(--bg);          
+    }
+    
+    .discount-container { margin: 20px 0; }
+    .discount-label { font-size: 1.05rem; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+    .discount-btns { display: flex; gap: 8px; color: var(--muted); }
+    .discount-btns button { flex: 1; text-align: center; font-size: 0.9rem; background: var(--bg); border-radius: 8px; padding: 8px; }
+    .discount-btns button.active-discount { background: var(--brand); color: white; border-color: var(--brand); }
+
+    .summary {
+      background: var(--bg);
+      padding: 16px 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      margin-top: 16px;
+    }
+    .summary .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 0.95rem;
+    }
+    .summary .row span { color: var(--muted); }
+    .summary .row.total {
+      border-top: 1px dashed var(--border);
+      margin-top: 8px;
+      padding-top: 14px;
+      font-size: 1.4rem;
+    }
+    .summary .row.total span { color: var(--text); font-weight: 700; }
+    .summary .row.total strong { color: var(--brand); font-weight: 800; }
+    
+    .muted { color: var(--muted); }
+    
+    .history-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg);
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+      transition: transform 0.2s;
+    }
+    .history-item:hover {
+      transform: translateY(-1px);
+      border-color: var(--muted);
+    }
+    .history-item:last-of-type { margin-bottom: 0; }
+
+    .card h3 img {
+      width: 32px !important;  
+      height: 32px !important; 
+    }
+
+    #buyRows img {
+      width: 32px !important;  
+      height: 32px !important; 
+    }
+
+    .mats-box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      background: var(--bg);
+      margin-top: 12px;
+    }
+    .mats-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mats-row:last-of-type { border-bottom: none; }
+    .mats-row img { width: 28px !important; height: 28px !important; object-fit: contain; }
+    
+    .cart-counter {
+      margin-bottom: 0;
+      margin-top: 4px;
+    }
+    .cart-counter button { padding: 2px 8px; font-size: 0.9rem; }
+    .cart-qty-val { width: 40px; text-align: center; font-weight: 700; font-size: 0.85rem; color: var(--text); }
+
+    /* Compact sizing rule specifically for Restock Basket counter items */
+    .buy-counter {
+      margin-bottom: 0 !important;
+      margin-top: 4px !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+    .buy-counter button {
+      padding: 2px 8px !important;
+      font-size: 0.85rem !important;
+    }
+    .buy-qty-val {
+      width: 35px !important;
+      font-size: 0.85rem !important;
+      font-weight: 700 !important;
+      text-align: center !important;
+      border: none !important;
+      background: transparent !important;
+      color: var(--text) !important;
+      padding: 0 !important;
+    }
+    .buy-qty-val::-webkit-outer-spin-button, .buy-qty-val::-webkit-inner-spin-button {
+      -webkit-appearance: none; margin: 0;
+    }
+    .buy-qty-val { -moz-appearance: textfield; }
+    
+    
+.buy-card {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 14px 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  min-height: 72px;      /* keeps every card the same height */
+
+  flex-wrap: wrap;
+  gap: 12px;
+
+  transition: transform .2s, box-shadow .2s;
+}
+
+.buy-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,.02);
+  border-color: var(--muted);
+}
+    .sync-status {
+      font-size: 0.8rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.05);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      transform: scale(0.9);
+      transition: transform 0.2s ease;
+    }
+    .modal-overlay.active .modal-box {
+      transform: scale(1);
+    }
+    .modal-box h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .modal-box p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+    }
+    .modal-actions button {
+      flex: 1;
+      padding: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <img src="https://i.postimg.cc/MKxb4XLB/PB-Logo.png" alt="PB Logo" style="width: 140px; height: 80px; object-fit: contain;">
+        <h1>Paleto Mechanic Repair Calculator</h1>
+      </div>
+      <div class="header-right">
+        <input id="empName" placeholder="Employee Name" style="width:180px;">
+        <button id="themeBtn">☀️ Light</button>
+      </div>
+    </header>
+
+    <div class="main-grid">
+      <div class="panel">
+        <h2>Service & Materials Menu</h2>
+        <div style="padding:24px;">
+          <div class="cards" id="menu-items"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="tabs">
+          <div class="tab active" data-tab="summary">Summary</div>
+          <div class="tab" data-tab="history" id="history-tab-btn">History</div>
+          <div class="tab" data-tab="buy">Buy Materials</div>
+        </div>
+
+        <!-- SUMMARY TAB -->
+        <div id="tab-summary" class="content">
+          <div class="summary-split">
+            <div>
+              <div class="discount-label" style="margin-bottom: 12px;">Current Selected Items</div>
+              <div id="cart" class="cart-container-box"></div>
+            </div>
+            
+            <div>
+              <div class="discount-container" style="margin-top: 0;">
+                <div class="discount-label">Apply Discount</div>
+                <div class="discount-btns">
+                  <button class="btn-small active-discount" data-disc="0">0%</button>
+                  <button class="btn-small" data-disc="10">10%</button>
+                  <button class="btn-small" data-disc="20">20%</button>
+                  <button class="btn-small" data-disc="30">30%</button>
+                </div>
+              </div>
+
+              <div class="summary">
+                <div class="row"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
+                <div class="row"><span>Discount</span><strong id="discount" style="color: var(--danger);">-$0.00</strong></div>
+                <div class="row total"><span>Total</span><strong id="total">$0.00</strong></div>
+              </div>
+
+              <div style="margin-top:20px; display:flex; gap:12px;">
+                <button id="checkoutBtn" class="btn-primary" style="flex:2; padding:14px; font-size: 1rem;">Complete Checkout</button>
+                <button id="resetBtn2" class="btn-danger" style="flex:1; padding:14px; font-size: 0.95rem;">Clear Order</button>
+              </div>
+              
+              <div class="discount-label" style="margin-top: 20px;">Total Materials Needed</div>
+              <div id="required-materials" class="mats-box">
+                <p class="muted" style="text-align: center; padding: 10px 0; font-size: 0.9rem;">No components required.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HISTORY TAB -->
+        <div id="tab-history" class="content" style="display:none;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="sync-status" id="syncStatus">Syncing history globally...</div>
+            <button id="refreshHistoryBtn" class="btn-small" style="margin-bottom: 10px;">🔄 Refresh Shared Logs</button>
+          </div>
+          <div id="historyList" style="max-height: 450px; overflow-y: auto;"></div>
+        </div>
+
+        <!-- BUY MATERIALS TAB -->
+        <div id="tab-buy" class="content" style="display:none;">
+          <div class="summary-split">
+            <div>
+              <div class="discount-label" style="margin-bottom: 12px;">Select Restock Volumes</div>
+              <div id="buyRows" style="border: 1px solid var(--border); padding: 16px; border-radius: 12px; background: var(--bg); margin-bottom:24px; display:flex; flex-direction:column; gap:12px;"></div>
+              
+              <div style="display:flex; gap:12px;">
+                <button id="clearBuyBtn" class="btn-danger" style="flex:1; padding:10px; font-size: 0.9rem;">Reset Selection Counters</button>
+              </div>
+            </div>
+            
+            <div>
+              <div class="discount-label" style="margin-bottom: 12px;">Active Restock Basket</div>
+              <div id="buyTabCart" class="restock-container-box"></div>
+              
+              <div class="summary" style="margin-top:0;">
+                <div class="row"><span>Restock Subtotal</span><strong id="buyTabSubtotal">$0.00</strong></div>
+                <div class="row total" style="border-top: none; margin-top: 0; padding-top: 8px;"><span>Restock Total</span><strong id="buyTabTotal">$0.00</strong></div>
+              </div>
+
+              <div style="margin-top:20px; display:flex; gap:12px;">
+                <button id="buyTabCheckoutBtn" class="btn-primary" style="flex:2; padding:14px; font-size: 1rem;">Complete Restock</button>
+                <button id="buyTabResetBtn" class="btn-danger" style="flex:1; padding:14px; font-size: 0.95rem;">Clear Restock</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="clearModal">
+    <div class="modal-box">
+      <h3>Clear Current Order?</h3>
+      <p>This action will remove all selected items from your active order. You cannot undo this step.</p>
+      <div class="modal-actions">
+        <button id="cancelClearBtn" style="background: transparent;">Cancel</button>
+        <button id="confirmClearBtn" class="btn-primary" style="background: var(--danger);">Yes, Clear Order</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="clearBuyModal">
+    <div class="modal-box">
+      <h3>Clear Restock Basket?</h3>
+      <p>This action will clear all materials from your active restocking basket.</p>
+      <div class="modal-actions">
+        <button id="cancelClearBuyBtn" style="background: transparent;">Cancel</button>
+        <button id="confirmClearBuyBtn" class="btn-primary" style="background: var(--danger);">Yes, Clear Restock</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-box" style="padding: 32px 24px;">
+      <div style="font-size: 3.5rem; margin-bottom: 12px;">✅</div>
+      <h3>Order Completed!</h3>
+      <p id="checkoutModalMessage">Transaction processed safely.</p>
+      <div class="modal-actions">
+        <button id="closeCheckoutBtn" class="btn-primary" style="width: 100%;">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // === DATA ===
+    const MENU_ITEMS = [
+      { id:'mat-scrap', name:'Scrap', price:75, logo:'https://i.postimg.cc/fbX39d7X/Scrap.png', recipe: { 'Scrap': 1 } },
+      { id:'mat-alum', name:'Aluminum', price:100, logo:'https://i.postimg.cc/bw5bb87X/Aluminium.png', recipe: { 'Aluminum': 1 } },
+      { id:'mat-steel', name:'Steel', price:125, logo:'https://i.postimg.cc/mDNLyN6V/Steel.png', recipe: { 'Steel': 1 } },
+      { id:'dm-window', name:'Window', price:45, logo:'https://i.postimg.cc/SRQ7ddDS/Window.png', recipe: { 'Glass': 1 } },
+      { id:'dm-door', name:'Door', price:75, logo:'https://i.postimg.cc/NfqrQp1s/Door.png', recipe: { 'Scrap': 1 } },
+      { id:'dm-tire', name:'Tire', price:20, logo:'https://i.postimg.cc/kM8BYKLp/Wheel.png', recipe: { 'Rubber': 1 } },
+      { id:'brake-pads', name:'Brake Pads', price:300, logo:'https://i.postimg.cc/Dycs5HNV/Brakepads.png' }, 
+      { id:'shop-repair', name:'Repair Kit', price:600, logo:'https://i.postimg.cc/zv8vgX8P/Adv-Repair.png', recipe: { 'Scrap': 2, 'Aluminum': 2, 'Glass': 2, 'Rubber': 4 } },
+      { id:'shop-oil', name:'Motor Oil', price:600, logo:'https://i.postimg.cc/7YNVmBG8/Oil.png' }
+    ];
+
+    const BUY_RATES = [
+      { key:'Rubber', logo:'https://i.postimg.cc/RhkPR8p1/Rubber.png', unit:10 },
+      { key:'Glass', logo:'https://i.postimg.cc/cCwzV0n2/Glass.png', unit:30 },
+      { key:'Scrap', logo:'https://i.postimg.cc/fbX39d7X/Scrap.png', unit:50 },
+      { key:'Aluminum', logo:'https://i.postimg.cc/bw5bb87X/Aluminium.png', unit:70 },
+      { key:'Steel', logo:'https://i.postimg.cc/mDNLyN6V/Steel.png', unit:90 }
+    ];
+
+    let cart = [];       
+    let buyCart = [];    
+    let discountPct = 0;
+    let history = [];
+    let buyQuantities = {};
+
+    const currency = n => '$' + Number(n).toFixed(2);
+
+    const SUPABASE_URL = 'https://gpaqlehknskrcthyaapo.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdwYXFsZWhrbnNrcmN0aHlhYXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NjQwMjEsImV4cCI6MjA5ODI0MDAyMX0.pVsGNoYVNsh6w0RTTCajtveVJ12wgxxgP1Vqhl2EOxQ'; 
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    function loadData() {
+      try {
+        cart = JSON.parse(localStorage.getItem('harm_cart') || '[]');
+        if(!Array.isArray(cart)) cart = []; 
+      } catch(e) { cart = []; }
+
+      try {
+        buyCart = JSON.parse(localStorage.getItem('harm_buy_cart') || '[]');
+        if(!Array.isArray(buyCart)) buyCart = []; 
+      } catch(e) { buyCart = []; }
+      
+      discountPct = parseFloat(localStorage.getItem('harm_discount') || '0');
+      if(isNaN(discountPct)) discountPct = 0;
+
+      try {
+        buyQuantities = JSON.parse(localStorage.getItem('harm_buy') || '{}');
+      } catch(e) { buyQuantities = {}; }
+      
+      try {
+        history = JSON.parse(localStorage.getItem('harm_history') || '[]');
+      } catch(e) { history = []; }
+      
+      fetchCloudHistory();
+    }
+
+    function saveData() {
+      localStorage.setItem('harm_cart', JSON.stringify(cart));
+      localStorage.setItem('harm_buy_cart', JSON.stringify(buyCart));
+      localStorage.setItem('harm_discount', discountPct);
+      localStorage.setItem('harm_buy', JSON.stringify(buyQuantities));
+    }
+
+    async function fetchCloudHistory() {
+      const statusEl = document.getElementById('syncStatus');
+      if(statusEl) statusEl.textContent = "Syncing live cloud database...";
+      try {
+        const { data, error } = await supabaseClient
+          .from('Paleto')
+          .select('*')
+          .order('id', { ascending: false });
+
+        if (!error && data) {
+          history = data;
+          localStorage.setItem('harm_history', JSON.stringify(history));
+          if(statusEl) statusEl.textContent = "🟢 Supabase Connected";
+          renderHistory();
+          return;
+        }
+      } catch(e) {
+        console.error("Supabase connection failed: ", e);
+      }
+      if(statusEl) statusEl.textContent = "⚠️ Offline mode (showing local logs)";
+      renderHistory();
+    }
+
+    async function pushCloudHistory(newOrder) {
+      const statusEl = document.getElementById('syncStatus');
+      if(statusEl) statusEl.textContent = "Uploading record safely...";
+      try {
+        const { error } = await supabaseClient
+          .from('Paleto')
+          .insert([newOrder]);
+
+        if(!error) {
+          if(statusEl) statusEl.textContent = "🟢 Logged to Supabase";
+          fetchCloudHistory(); 
+        } else {
+          console.error(error);
+          if(statusEl) statusEl.textContent = "❌ Database Error";
+        }
+      } catch(e) {
+        console.error("Cloud push failed:", e);
+        if(statusEl) statusEl.textContent = "❌ Connection Dropped";
+      }
+    }
+
+    function renderCards() {
+      const container = document.getElementById('menu-items');
+      if (!container) return;
+      
+      container.innerHTML = MENU_ITEMS.map(item => `
+        <div class="card">
+          <div>
+            <h3 style="display: flex; align-items: center; gap: 8px;">
+              <img src="${item.logo}" alt="" style="width: 20px; height: 20px; object-fit: contain;">
+              ${item.name}
+            </h3>
+            <div class="price">${currency(item.price)}</div>
+          </div>
+          <div>
+            <div class="counter-group">
+              <button class="dec">-</button>
+              <input type="number" class="qty-val" value="1" min="1">
+              <button class="inc">+</button>
+            </div>
+            <button class="add-btn btn-primary" data-id="${item.id}" style="width:100%;">Add to Order</button>
+          </div>
+        </div>
+      `).join('');
+
+      container.querySelectorAll('.card').forEach(card => {
+        const qtyInp = card.querySelector('.qty-val');
+        const itemBtn = card.querySelector('.add-btn');
+        const itemData = MENU_ITEMS.find(i => i.id === itemBtn.dataset.id);
+
+        card.querySelector('.dec').onclick = () => { qtyInp.value = Math.max(1, parseInt(qtyInp.value || 1) - 1); };
+        card.querySelector('.inc').onclick = () => { qtyInp.value = parseInt(qtyInp.value || 0) + 1; };
+        
+        qtyInp.onchange = () => { if(parseInt(qtyInp.value) < 1 || isNaN(parseInt(qtyInp.value))) qtyInp.value = 1; };
+
+        itemBtn.onclick = () => {
+          const parsedQty = parseInt(qtyInp.value) || 1;
+          addToCart({...itemData, qty: parsedQty});
+          qtyInp.value = 1; 
+        };
+      });
+    }
+
+    function addToCart(item) {
+      if(!item) return;
+      const existing = cart.find(i => i.id === item.id);
+      if (existing) existing.qty += item.qty;
+      else cart.push(item);
+      saveData();
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartEl = document.getElementById('cart');
+      if (!cartEl) return;
+
+      if (!cart.length) {
+        cartEl.innerHTML = `<p class="muted" style="text-align:center; padding:48px 20px; font-size:0.95rem; grid-column: 1 / -1;">No items added to current order.</p>`;
+      } else {
+        cartEl.innerHTML = cart.map((item, i) => `
+          <div class="cart-item">
+            <div>
+              <strong style="font-size:0.95rem;">${item.name}</strong><br>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <small class="muted">${currency(item.price)} × </small>
+                <div class="counter-group cart-counter">
+                  <button class="cart-dec" data-i="${i}">-</button>
+                  <input type="number" class="cart-qty-val" value="${item.qty}" min="1" data-i="${i}">
+                  <button class="cart-inc" data-i="${i}">+</button>
+                </div>
+              </div>
+            </div>
+            <div style="text-align:right; display:flex; align-items:center; gap:14px;">
+              <div><strong>${currency(item.price * item.qty)}</strong></div>
+              <button class="cart-del" data-i="${i}" style="color:var(--danger); background:none; border:none; padding:4px 8px; font-size:1.25rem; line-height:1;">&times;</button>
+            </div>
+          </div>
+        `).join('');
+
+        cartEl.querySelectorAll('.cart-dec').forEach(btn => {
+          btn.onclick = () => {
+            const index = parseInt(btn.dataset.i);
+            if (cart[index].qty > 1) cart[index].qty--;
+            else cart.splice(index, 1);
+            saveData(); renderCart();
+          };
+        });
+
+        cartEl.querySelectorAll('.cart-inc').forEach(btn => {
+          btn.onclick = () => {
+            const index = parseInt(btn.dataset.i);
+            cart[index].qty++;
+            saveData(); renderCart();
+          };
+        });
+
+        cartEl.querySelectorAll('.cart-qty-val').forEach(inp => {
+          inp.oninput = () => {
+            const index = parseInt(inp.dataset.i);
+            let val = parseInt(inp.value);
+            if(!isNaN(val) && val >= 1) {
+              cart[index].qty = val;
+              saveData(); renderTotals(); calculateRequiredMaterials();
+            }
+          };
+          inp.onchange = () => {
+            const index = parseInt(inp.dataset.i);
+            let val = parseInt(inp.value);
+            if (isNaN(val) || val < 1) cart[index].qty = 1;
+            saveData(); renderCart();
+          };
+        });
+
+        cartEl.querySelectorAll('.cart-del').forEach(btn => {
+          btn.onclick = () => {
+            cart.splice(parseInt(btn.dataset.i), 1);
+            saveData(); renderCart();
+          };
+        });
+      }
+
+      renderTotals();
+      calculateRequiredMaterials();
+    }
+
+    function renderBuyCart() {
+      const buyCartEl = document.getElementById('buyTabCart');
+      if (!buyCartEl) return;
+
+      if (!buyCart.length) {
+        buyCartEl.innerHTML = `<p class="muted" style="text-align:center; padding:48px 20px; font-size:0.95rem; grid-column: 1 / -1;">Restock basket is empty.</p>`;
+      } else {
+        buyCartEl.innerHTML = buyCart.map((item, i) => `
+          <div class="cart-item">
+            <div>
+              <strong style="font-size:0.95rem;">${item.name}</strong><br>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <small class="muted">${currency(item.price)} × </small>
+                <div class="counter-group buy-counter">
+                  <button class="buycart-dec" data-i="${i}">-</button>
+                  <input type="number" class="buy-qty-val" value="${item.qty}" min="1" data-i="${i}">
+                  <button class="buycart-inc" data-i="${i}">+</button>
+                </div>
+              </div>
+            </div>
+            <div style="text-align:right; display:flex; align-items:center; gap:8px;">
+              <div><strong style="font-size:0.9rem;">${currency(item.price * item.qty)}</strong></div>
+              <button class="buycart-del" data-i="${i}" style="color:var(--danger); background:none; border:none; padding:2px 4px; font-size:1.1rem; line-height:1;">&times;</button>
+            </div>
+          </div>
+        `).join('');
+
+        buyCartEl.querySelectorAll('.buycart-dec').forEach(btn => {
+          btn.onclick = () => {
+            const index = parseInt(btn.dataset.i);
+            if (buyCart[index].qty > 1) buyCart[index].qty--;
+            else buyCart.splice(index, 1);
+            saveData(); renderBuyCart();
+          };
+        });
+
+        buyCartEl.querySelectorAll('.buycart-inc').forEach(btn => {
+          btn.onclick = () => {
+            const index = parseInt(btn.dataset.i);
+            buyCart[index].qty++;
+            saveData(); renderBuyCart();
+          };
+        });
+
+        buyCartEl.querySelectorAll('.buy-qty-val').forEach(inp => {
+          inp.oninput = () => {
+            const index = parseInt(inp.dataset.i);
+            let val = parseInt(inp.value);
+            if(!isNaN(val) && val >= 1) {
+              buyCart[index].qty = val;
+              saveData(); renderTotals();
+            }
+          };
+          inp.onchange = () => {
+            const index = parseInt(inp.dataset.i);
+            let val = parseInt(inp.value);
+            if (isNaN(val) || val < 1) buyCart[index].qty = 1;
+            saveData(); renderBuyCart();
+          };
+        });
+
+        buyCartEl.querySelectorAll('.buycart-del').forEach(btn => {
+          btn.onclick = () => {
+            buyCart.splice(parseInt(btn.dataset.i), 1);
+            saveData(); renderBuyCart();
+          };
+        });
+      }
+
+      renderTotals();
+    }
+
+    function calculateRequiredMaterials() {
+      const matsContainer = document.getElementById('required-materials');
+      if (!matsContainer) return;
+
+      const totalMatsNeeded = {};
+      cart.forEach(item => {
+        if (item.recipe) {
+          Object.keys(item.recipe).forEach(matName => {
+            totalMatsNeeded[matName] = (totalMatsNeeded[matName] || 0) + (item.recipe[matName] * item.qty);
+          });
+        }
+      });
+
+      const keys = Object.keys(totalMatsNeeded);
+      if (keys.length === 0) {
+        matsContainer.innerHTML = `<p class="muted" style="text-align: center; padding: 10px 0; font-size: 0.9rem;">No components required.</p>`;
+        return;
+      }
+
+      matsContainer.innerHTML = keys.map(matName => {
+        const rateInfo = BUY_RATES.find(r => r.key === matName) || { logo: '' };
+        return `
+          <div class="mats-row">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <img src="${rateInfo.logo}" alt="">
+              <strong>${matName}</strong>
+            </div>
+            <div style="font-size:1.1rem; font-weight:700; color:var(--brand);">× ${totalMatsNeeded[matName]}</div>
+          </div>`;
+      }).join('');
+    }
+
+    function renderTotals() {
+      const subtotal = cart.reduce((a, c) => a + c.price * c.qty, 0);
+      const discountAmt = subtotal * (discountPct / 100);
+      const total = subtotal - discountAmt;
+
+      if(document.getElementById('subtotal')) document.getElementById('subtotal').textContent = currency(subtotal);
+      if(document.getElementById('discount')) document.getElementById('discount').textContent = '-' + currency(discountAmt);
+      if(document.getElementById('total')) document.getElementById('total').textContent = currency(total);
+
+      const buySubtotal = buyCart.reduce((a, c) => a + c.price * c.qty, 0);
+      if(document.getElementById('buyTabSubtotal')) document.getElementById('buyTabSubtotal').textContent = currency(buySubtotal);
+      if(document.getElementById('buyTabTotal')) document.getElementById('buyTabTotal').textContent = currency(buySubtotal);
+
+      document.querySelectorAll('[data-disc]').forEach(btn => {
+        if(parseInt(btn.dataset.disc) === discountPct) btn.classList.add('active-discount');
+        else btn.classList.remove('active-discount');
+      });
+    }
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        document.getElementById('tab-summary').style.display = tab.dataset.tab === 'summary' ? 'grid' : 'none';
+        document.getElementById('tab-history').style.display = tab.dataset.tab === 'history' ? 'block' : 'none';
+        document.getElementById('tab-buy').style.display = tab.dataset.tab === 'buy' ? 'grid' : 'none';
+
+        if (tab.dataset.tab === 'history') fetchCloudHistory();
+        if (tab.dataset.tab === 'buy') renderBuyTab();
+      });
+    });
+
+    document.getElementById('refreshHistoryBtn').onclick = fetchCloudHistory;
+
+    document.querySelectorAll('[data-disc]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        discountPct = parseInt(btn.dataset.disc);
+        saveData(); renderTotals();
+      });
+    });
+
+    async function standardCheckout() {
+      if (!cart.length) return;
+      const total = currency(cart.reduce((a, c) => a + c.price * c.qty, 0) * (1 - discountPct / 100));
+      const emp = document.getElementById('empName').value.trim() || "Staff";
+
+      const orderPayload = {
+        date: new Date().toLocaleString(),
+        items: cart.map(i => `${i.qty}× ${i.name}`).join(', '), 
+        total: total,
+        employee: emp,
+        discount: discountPct
+      };
+
+      await pushCloudHistory(orderPayload);
+      cart = [];
+      discountPct = 0;
+      saveData(); renderCart();
+      showCheckoutSuccessModal(total, emp, "Order Processed & Logged");
+    }
+
+    function restockCheckout() {
+      if (!buyCart.length) return;
+      const total = currency(buyCart.reduce((a, c) => a + c.price * c.qty, 0)); 
+      const emp = document.getElementById('empName').value.trim() || "Staff";
+
+      buyCart = [];
+      saveData(); renderBuyCart();
+      showCheckoutSuccessModal(total, emp, "Order Summery");
+    }
+
+    function showCheckoutSuccessModal(totalAmount, employeeName, customMsg) {
+      const checkoutModal = document.getElementById('checkoutModal');
+      const checkoutMessage = document.getElementById('checkoutModalMessage');
+      if (checkoutMessage) {
+        checkoutMessage.innerHTML = `${customMsg}.<br>Total Value: <strong style="color:var(--brand);">${totalAmount}</strong><br>Processed By: <strong>${employeeName}</strong>`;
+      }
+      if (checkoutModal) checkoutModal.classList.add('active');
+    }
+
+    function renderHistory() {
+      const container = document.getElementById('historyList');
+      if (!container) return;
+      if (!history.length) {
+        container.innerHTML = `<p class="muted" style="text-align:center; padding: 30px 0;">No previous orders logged.</p>`;
+        return;
+      }
+      container.innerHTML = history.map((order, i) => `
+        <div class="history-item">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; font-size:0.9rem; border-bottom: 1px dashed var(--border); padding-bottom: 8px;">
+            <strong>📆 ${order.date}</strong>
+            <span class="muted" style="background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 6px;">👤 ${order.employee}</span>
+          </div>
+          <div style="font-size:0.95rem; margin-bottom:12px; font-weight: 500;">🛠️ ${order.items}</div>
+          <div style="font-size: 0.95rem; display:flex; justify-content:space-between; align-items:center;">
+            <div>Total Paid: <strong style="color:var(--brand); font-size:1.1rem;">${order.total}</strong></div>
+            ${order.discount > 0 ? `<span style="color:var(--success); font-size:0.85rem; font-weight:700; background:rgba(16,185,129,0.1); padding: 2px 6px; border-radius: 4px;">${order.discount}% Off</span>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderBuyTab() {
+      const container = document.getElementById('buyRows');
+      if (!container) return;
+      let html = '';
+      
+      BUY_RATES.forEach(r => {
+        const qty = buyQuantities[r.key] || 0;
+        html += `
+          <div class="buy-card">
+            <div>
+              <strong style="display: flex; align-items: center; gap: 8px; font-size:0.95rem;">
+                <img src="${r.logo}" alt="" style="width: 20px; height: 20px; object-fit: contain;">
+                ${r.key}
+              </strong> 
+            </div>
+            <div style="display:flex; align-items:center; gap:16px;">
+              <span style="color:var(--muted); font-size:0.9rem;">${currency(r.unit)} each</span>
+              
+              <div class="counter-group" style="margin-bottom:0;">
+                <button class="buy-dec" data-key="${r.key}">-</button>
+                <input type="number" class="qty-val" id="qty-${r.key}" value="${qty}" min="0">
+                <button class="buy-inc" data-key="${r.key}">+</button>
+              </div>
+
+              <button class="buy-add-btn btn-primary btn-small" data-key="${r.key}">Add to Restock</button>
+            </div>
+          </div>`;
+      });
+      container.innerHTML = html;
+
+      container.querySelectorAll('.buy-dec').forEach(btn => {
+        btn.onclick = () => {
+          const key = btn.dataset.key;
+          let val = buyQuantities[key] || 0;
+          if (val > 0) updateBuyItem(key, val - 1);
+        };
+      });
+
+      container.querySelectorAll('.buy-inc').forEach(btn => {
+        btn.onclick = () => {
+          const key = btn.dataset.key;
+          let val = buyQuantities[key] || 0;
+          updateBuyItem(key, val + 1);
+        };
+      });
+
+      container.querySelectorAll('.qty-val').forEach(inp => {
+        inp.oninput = () => {
+          const key = inp.id.replace('qty-', '');
+          let val = parseInt(inp.value);
+          if(!isNaN(val) && val >= 0) { buyQuantities[key] = val; saveData(); }
+        };
+        inp.onchange = () => {
+          const key = inp.id.replace('qty-', '');
+          let val = parseInt(inp.value);
+          if (isNaN(val) || val < 0) { inp.value = 0; buyQuantities[key] = 0; }
+          saveData();
+        };
+      });
+
+      container.querySelectorAll('.buy-add-btn').forEach(btn => {
+        btn.onclick = () => {
+          const key = btn.dataset.key;
+          const targetQty = buyQuantities[key] || 0;
+          if (targetQty <= 0) return;
+
+          const rate = BUY_RATES.find(r => r.key === key);
+          if (rate) {
+            const existing = buyCart.find(i => i.id === `buy-${rate.key}`);
+            if (existing) existing.qty += targetQty;
+            else buyCart.push({ id: `buy-${rate.key}`, name: rate.key, price: rate.unit, logo: rate.logo, qty: targetQty });
+
+            updateBuyItem(key, 0); 
+            saveData(); renderBuyCart(); 
+          }
+        };
+      });
+
+      renderBuyCart();
+    }
+
+    function updateBuyItem(key, newQty) {
+      buyQuantities[key] = newQty;
+      saveData();
+      const qtyEl = document.getElementById(`qty-${key}`);
+      if (qtyEl) qtyEl.value = newQty;
+    }
+
+    document.getElementById('clearBuyBtn').onclick = () => {
+      buyQuantities = {};
+      saveData(); renderBuyTab();
+    };
+
+    document.getElementById('checkoutBtn').onclick = standardCheckout;
+    document.getElementById('buyTabCheckoutBtn').onclick = restockCheckout;
+
+    const themeBtn = document.getElementById('themeBtn');
+    themeBtn.onclick = () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      document.documentElement.setAttribute('data-theme', isLight ? '' : 'light');
+      themeBtn.textContent = isLight ? '☀️ Light' : '🌙 Dark';
+      localStorage.setItem('harm_theme', isLight ? 'dark' : 'light');
+    };
+
+    const clearModal = document.getElementById('clearModal');
+    const clearBuyModal = document.getElementById('clearBuyModal');
+    const checkoutModal = document.getElementById('checkoutModal');
+    
+    document.getElementById('resetBtn2').onclick = () => {
+      if (cart.length > 0 || discountPct > 0) clearModal.classList.add('active');
+    };
+    document.getElementById('buyTabResetBtn').onclick = () => {
+      if (buyCart.length > 0) clearBuyModal.classList.add('active');
+    };
+
+    document.getElementById('cancelClearBtn').onclick = () => clearModal.classList.remove('active');
+    document.getElementById('cancelClearBuyBtn').onclick = () => clearBuyModal.classList.remove('active');
+    document.getElementById('closeCheckoutBtn').onclick = () => checkoutModal.classList.remove('active');
+
+    document.getElementById('confirmClearBtn').onclick = () => {
+      cart = []; discountPct = 0; saveData(); renderCart();
+      clearModal.classList.remove('active');
+    };
+    document.getElementById('confirmClearBuyBtn').onclick = () => {
+      buyCart = []; saveData(); renderBuyCart();
+      clearBuyModal.classList.remove('active');
+    };
+
+    window.onclick = (e) => {
+      if (e.target === clearModal) clearModal.classList.remove('active');
+      if (e.target === clearBuyModal) clearBuyModal.classList.remove('active');
+      if (e.target === checkoutModal) checkoutModal.classList.remove('active');
+    };
+
+    loadData();
+    renderCards();
+    renderCart();
+
+    if (localStorage.getItem('harm_theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      themeBtn.textContent = '🌙 Dark';
+    } else {
+      document.documentElement.setAttribute('data-theme', '');
+      themeBtn.textContent = '☀️ Light';
+    }
+    
+    document.getElementById('empName').value = localStorage.getItem('harm_emp') || '';
+    document.getElementById('empName').oninput = e => localStorage.setItem('harm_emp', e.target.value);
+    
+    setInterval(fetchCloudHistory, 60000);
+  </script>
+</body>
+</html>
